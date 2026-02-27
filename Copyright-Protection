@@ -1,0 +1,33 @@
+<!-- Copyright Protection -->
+
+
+<script type='text/javascript'>
+// Minimal Copyright Protection
+document.addEventListener('contextmenu', event => event.preventDefault()); // Block Right Click
+
+document.onkeydown = function(e) {
+  // Block Ctrl+C (Copy), Ctrl+U (View Source), Ctrl+S (Save)
+  if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73)) {
+    return false;
+  }
+};
+</script>
+
+<style>
+/* Disable text selection via CSS */
+body {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Optional: Allow selection in search boxes or contact forms only */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+</style>
