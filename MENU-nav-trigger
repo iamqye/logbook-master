@@ -1,0 +1,89 @@
+<!-- MENU -->
+
+<div id='nav-trigger' onclick='tNav(this)'>
+  <div class='b'></div><div class='b'></div><div class='b'></div>
+</div>
+
+<div id='nav-overlay'>
+  <div class='menu-box'>
+    <a href='/p/about'>About</a>
+    <a href='/p/contact'>Contact</a>
+    
+    <div class='drop' onclick='tDrop()'>
+      <span class='ghost'>+</span>Social Media<span id='arr'>+</span>
+      <div id='items'>
+        <a href='#'>Facebook</a>
+        <a href='#'>Instagram</a>
+      
+      </div>
+    </div>
+
+   
+  </div>
+</div>
+
+<style>
+  /* ICON - Slightly Larger & Thicker */
+  #nav-trigger { position: fixed; top: 35px; right: 35px; z-index: 1000; cursor: pointer; width: 28px; }
+  .b { height: 2px; background: #000; margin: 6px 0; transition: .3s; width: 100%; }
+  
+  /* Icon Animation */
+  .open .b:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .open .b:nth-child(2) { opacity: 0; }
+  .open .b:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* OVERLAY */
+  #nav-overlay { 
+    position: fixed; inset: 0; background: #fff; z-index: 999;
+    display: flex; align-items: center; justify-content: center;
+    visibility: hidden; opacity: 0; transition: .4s cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  #nav-overlay.show { visibility: visible; opacity: 1; }
+
+  /* MENU - Increased Sizes */
+  .menu-box { text-align: center; font-family: 'Inter', sans-serif; width: 100%; }
+  .menu-box a, .drop { 
+    display: block; color: #000; text-decoration: none; 
+    font-size: 24px; /* Bigger Font */
+    letter-spacing: 5px; 
+    text-transform: uppercase; 
+    margin: 30px 0; 
+    cursor: pointer;
+    font-weight: 300;
+  }
+
+  /* DROPDOWN SYMMETRY */
+  .ghost { visibility: hidden; padding: 0 8px; }
+  #arr { display: inline-block; padding: 0 8px; opacity: .4; transition: .3s; }
+  #items { max-height: 0; overflow: hidden; transition: .4s ease-in-out; }
+  #items.on { max-height: 300px; margin-top: 15px; }
+  #items a { font-size: 16px; opacity: .5; margin: 15px 0; letter-spacing: 3px; }
+  .rot { transform: rotate(45deg); }
+</style>
+
+<script>
+  const trigger = document.getElementById('nav-trigger');
+  const overlay = document.getElementById('nav-overlay');
+  const items = document.getElementById('items');
+  const arr = document.getElementById('arr');
+
+  function tNav(x) {
+    x.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+
+  function tDrop() {
+    items.classList.toggle('on');
+    arr.classList.toggle('rot');
+  }
+
+  // CLOSE ON SCROLL
+  window.addEventListener('scroll', () => {
+    if (overlay.classList.contains('show')) {
+      trigger.classList.remove('open');
+      overlay.classList.remove('show');
+      items.classList.remove('on'); // Reset dropdown too
+      arr.classList.remove('rot');
+    }
+  });
+</script>
