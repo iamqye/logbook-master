@@ -1,0 +1,51 @@
+<!-- Progress Bar -->
+<div id='post-progress-wrapper' style='display:none;'>
+  <div id='post-progress-container'>
+    <div id='post-progress-bar'></div>
+  </div>
+</div>
+
+<style>
+  #post-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(0,0,0,0.03);
+    z-index: 10001;
+  }
+  #post-progress-bar {
+    height: 100%;
+    background: #000;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+</style>
+
+<script>
+  (function() {
+    var loc = window.location.pathname;
+    
+    // 1. Check if it's the home page
+    var isHome = (loc === '/' || loc === '/index.html');
+    
+    // 2. Check for your specific static pages
+    var isExcludedPage = loc.includes('about-me') || loc.includes('contact-form') || loc.includes('/p/');
+
+    // Only show if it's NOT home and NOT one of those pages
+    if (!isHome && !isExcludedPage) {
+      var wrap = document.getElementById('post-progress-wrapper');
+      var bar = document.getElementById('post-progress-bar');
+      
+      wrap.style.display = 'block';
+
+      window.addEventListener('scroll', function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + '%';
+      }, { passive: true });
+    }
+  })();
+</script>
