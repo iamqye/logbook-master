@@ -1,0 +1,23 @@
+<script type='text/javascript'>
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+  // Mengambil judul postingan (sesuaikan class .post-title jika berbeda)
+  var postTitle = document.querySelector('.post-title, .entry-title');
+  var titleText = postTitle ? postTitle.innerText.trim() : "Kidigo Logbook";
+
+  // Mencari semua tag img di dalam artikel
+  var images = document.querySelectorAll('.post-body img, .entry-content img');
+
+  for (var i = 0; i < images.length; i++) {
+    // Jika gambar belum punya ALT, isi dengan judul postingan
+    if (!images[i].getAttribute('alt')) {
+      images[i].setAttribute('alt', titleText);
+    }
+    // Jika gambar belum punya TITLE, isi dengan judul postingan
+    if (!images[i].getAttribute('title')) {
+      images[i].setAttribute('title', titleText);
+    }
+  }
+});
+//]]>
+</script>
